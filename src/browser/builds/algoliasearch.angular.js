@@ -4,7 +4,7 @@
 // It's using $http to do requests with a JSONP fallback
 // $q promises are returned
 
-var inherits = require('inherits');
+var inherits = require('../../inherits');
 
 var forEach = require('foreach');
 
@@ -18,7 +18,7 @@ var places = require('../../places.js');
 window.algoliasearch = require('./algoliasearch');
 
 if (process.env.NODE_ENV === 'debug') {
-  require('debug').enable('algoliasearch*');
+  (function() {}).enable('algoliasearch*');
 }
 
 window.angular.module('algoliasearch', [])
@@ -44,7 +44,7 @@ window.angular.module('algoliasearch', [])
     // we expose into window no matter how we are used, this will allow
     // us to easily debug any website running algolia
     window.__algolia = {
-      debug: require('debug'),
+      debug: function() {},
       algoliasearch: algoliasearch
     };
 

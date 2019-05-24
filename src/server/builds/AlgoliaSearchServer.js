@@ -4,7 +4,7 @@
 
 module.exports = AlgoliaSearchServer;
 
-var inherits = require('inherits');
+var inherits = require('util').inherits;
 
 var AlgoliaSearch = require('../../AlgoliaSearch');
 

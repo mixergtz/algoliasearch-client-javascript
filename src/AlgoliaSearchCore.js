@@ -38,10 +38,10 @@ var RESET_APP_DATA_TIMER =
  *           If you provide them, you will less benefit from our HA implementation
  */
 function AlgoliaSearchCore(applicationID, apiKey, opts) {
-  var debug = require('debug')('algoliasearch');
+  var debug = function() {};
 
   var clone = require('./clone.js');
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var map = require('./map.js');
 
   var usage = 'Usage: algoliasearch(applicationID, apiKey, opts)';
@@ -184,7 +184,7 @@ AlgoliaSearchCore.prototype.addAlgoliaAgent = function(algoliaAgent) {
 AlgoliaSearchCore.prototype._jsonRequest = function(initialOpts) {
   this._checkAppIdData();
 
-  var requestDebug = require('debug')('algoliasearch:' + initialOpts.url);
+  var requestDebug = (function() {})('algoliasearch:' + initialOpts.url);
 
 
   var body;
@@ -567,7 +567,6 @@ AlgoliaSearchCore.prototype._getSearchParams = function(args, params) {
  * @param [Object] options.headers Extra headers to send
  */
 AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
-  var forEach = require('foreach');
 
   var ua = options.additionalUA ?
     this._ua + '; ' + options.additionalUA :
@@ -594,12 +593,12 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
     requestHeaders['x-algolia-tagfilters'] = this.securityTags;
   }
 
-  forEach(this.extraHeaders, function addToRequestHeaders(value, key) {
+  Object.keys(this.extraHeaders).forEach(function addToRequestHeaders(value, key) {
     requestHeaders[key] = value;
   });
 
   if (options.headers) {
-    forEach(options.headers, function addToRequestHeaders(value, key) {
+    Object.keys(options.headers).forEach(function addToRequestHeaders(value, key) {
       requestHeaders[key] = value;
     });
   }
@@ -617,7 +616,7 @@ AlgoliaSearchCore.prototype._computeRequestHeaders = function(options) {
  * @return {Promise|undefined} Returns a promise if no callback given
  */
 AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var map = require('./map.js');
 
   var usage = 'Usage: client.search(arrayOfQueries[, callback])';
@@ -700,7 +699,7 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
 * Pagination is not supported. The page and hitsPerPage parameters will be ignored.
 */
 AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var map = require('./map.js');
 
   var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
@@ -852,9 +851,8 @@ AlgoliaSearchCore.prototype._cacheAppIdData = function(data) {
 };
 
 AlgoliaSearchCore.prototype._partialAppIdDataUpdate = function(newData) {
-  var foreach = require('foreach');
   var currentData = this._getAppIdData();
-  foreach(newData, function(value, key) {
+  Object.keys(newData).forEach(function(value, key) {
     currentData[key] = value;
   });
 

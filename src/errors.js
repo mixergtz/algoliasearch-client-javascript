@@ -4,11 +4,9 @@
 // We use custom error "types" so that we can act on them when we need it
 // e.g.: if error instanceof errors.UnparsableJSON then..
 
-var inherits = require('inherits');
+var inherits = require('./inherits');
 
 function AlgoliaSearchError(message, extraProperties) {
-  var forEach = require('foreach');
-
   var error = this;
 
   // try to get a stacktrace
@@ -22,7 +20,7 @@ function AlgoliaSearchError(message, extraProperties) {
   this.message = message || 'Unknown error';
 
   if (extraProperties) {
-    forEach(extraProperties, function addToErrorObject(value, key) {
+    Object.keys(extraProperties).forEach(function addToErrorObject(value, key) {
       error[key] = value;
     });
   }

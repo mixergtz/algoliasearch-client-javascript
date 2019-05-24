@@ -4,7 +4,7 @@ var Index = require('./Index.js');
 var deprecate = require('./deprecate.js');
 var deprecatedMessage = require('./deprecatedMessage.js');
 var AlgoliaSearchCore = require('./AlgoliaSearchCore.js');
-var inherits = require('inherits');
+var inherits = require('./inherits');
 var errors = require('./errors');
 
 function AlgoliaSearch() {
@@ -311,7 +311,7 @@ AlgoliaSearch.prototype.addUserKey = deprecate(function(acls, params, callback) 
  * @see {@link https://www.algolia.com/doc/rest_api#AddKey|Algolia REST API Documentation}
  */
 AlgoliaSearch.prototype.addApiKey = function(acls, params, callback) {
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var usage = 'Usage: client.addApiKey(arrayOfAcls[, params, callback])';
 
   if (!isArray(acls)) {
@@ -402,7 +402,7 @@ AlgoliaSearch.prototype.updateUserKey = deprecate(function(key, acls, params, ca
  * @see {@link https://www.algolia.com/doc/rest_api#UpdateIndexKey|Algolia REST API Documentation}
  */
 AlgoliaSearch.prototype.updateApiKey = function(key, acls, params, callback) {
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var usage = 'Usage: client.updateApiKey(key, arrayOfAcls[, params, callback])';
 
   if (!isArray(acls)) {
@@ -503,7 +503,7 @@ AlgoliaSearch.prototype.sendQueriesBatch = deprecate(function sendQueriesBatchDe
  * }], cb)
  */
 AlgoliaSearch.prototype.batch = function(operations, callback) {
-  var isArray = require('isarray');
+  var isArray = Array.isArray;
   var usage = 'Usage: client.batch(operations[, callback])';
 
   if (!isArray(operations)) {

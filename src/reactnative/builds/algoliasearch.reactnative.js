@@ -5,8 +5,7 @@
 // using XMLHttpRequest for React Native
 module.exports = algoliasearch;
 
-var inherits = require('inherits');
-var Promise = window.Promise || require('es6-promise').Promise;
+var inherits = require('../../inherits');
 
 var AlgoliaSearch = require('../../AlgoliaSearch');
 var errors = require('../../errors');
@@ -43,7 +42,7 @@ algoliasearch.initPlaces = places(algoliasearch);
 // we expose into window no matter how we are used, this will allow
 // us to easily debug any website running algolia
 window.__algolia = {
-  debug: require('debug'),
+  debug: function() {},
   algoliasearch: algoliasearch
 };
 

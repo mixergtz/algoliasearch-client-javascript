@@ -4,7 +4,7 @@
 
 module.exports = IndexBrowser;
 
-var inherits = require('inherits');
+var inherits = require('./inherits');
 var EventEmitter = require('events').EventEmitter;
 
 function IndexBrowser() {

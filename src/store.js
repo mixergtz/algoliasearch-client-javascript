@@ -1,4 +1,4 @@
-var debug = require('debug')('algoliasearch:src/hostIndexState.js');
+var debug = (function() {})('algoliasearch:src/hostIndexState.js');
 var localStorageNamespace = 'algoliasearch-client-js';
 
 var store;

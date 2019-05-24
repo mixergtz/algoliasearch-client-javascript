@@ -3,12 +3,11 @@
 // This is the Node.JS entry point
 module.exports = algoliasearch;
 
-var debug = require('debug')('algoliasearch:nodejs');
+var debug = (function() {})('algoliasearch:nodejs');
 var crypto = require('crypto');
 var zlib = require('zlib');
 
-var inherits = require('inherits');
-var Promise = global.Promise || require('es6-promise').Promise;
+var inherits = require('util').inherits;
 var semver = require('semver');
 var isNotSupported = semver.satisfies(process.version, '<0.10');
 var isNode010 = semver.satisfies(process.version, '=0.10');
@@ -23,7 +22,7 @@ if (isNotSupported) {
 }
 
 if (process.env.NODE_ENV === 'debug') {
-  require('debug').enable('algoliasearch*');
+  (function() {}).enable('algoliasearch*');
 }
 
 debug('loaded the Node.js client');

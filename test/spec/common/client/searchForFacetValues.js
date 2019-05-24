@@ -1,7 +1,6 @@
 'use strict';
 
 var test = require('tape');
-var Promise = global.Promise || require('es6-promise').Promise;
 
 test('client.searchForFacetValues()', function(t) {
   t.plan(6);

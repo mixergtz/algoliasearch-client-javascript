@@ -1,13 +1,10 @@
 'use strict';
 
-var global = require('global');
-var Promise = global.Promise || require('es6-promise').Promise;
-
 // This is the standalone browser build entry point
 // Browser implementation of the Algolia Search JavaScript client,
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
-  var inherits = require('inherits');
+  var inherits = require('../inherits');
   var errors = require('../errors');
   var inlineHeaders = require('./inline-headers');
   var jsonpRequest = require('./jsonp-request');
@@ -15,7 +12,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   uaSuffix = uaSuffix || '';
 
   if (process.env.NODE_ENV === 'debug') {
-    require('debug').enable('algoliasearch*');
+    (function() {}).enable('algoliasearch*');
   }
 
   function algoliasearch(applicationID, apiKey, opts) {
@@ -38,7 +35,7 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   // we expose into window no matter how we are used, this will allow
   // us to easily debug any website running algolia
   global.__algolia = {
-    debug: require('debug'),
+    debug: function() {},
     algoliasearch: algoliasearch
   };
 
